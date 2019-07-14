@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock, Paper, Scissors</title>
+</head>
+<body>
+    <script>
+        //Computer Selection
+        const computerPlay = () => {
+            let picks = ['Rock', 'Paper', 'Scissors']
+            return picks[Math.floor(Math.random()*3)]
+        }
+
+        //Player selection
+        const playerPlay = () => {
+            let userInput = prompt('Pick rock, paper, or scissors').toLowerCase()
+            return userInput
+        }
+        //Round of rock, paper, scissors
+        const singleRound = (playerSelection, computerSelection) => {
+            let p = playerSelection.toLowerCase()
+            let c = computerSelection.toLowerCase()
+            if (p === 'rock') {
+                if(c === 'scissors') {
+                    return `You win!`
+                } else if (c === 'paper') {
+                    return 'You lose!'
+                } else {
+                    return "It's a draw!"
+                }
+            }
+            if(p === 'scissors') {
+                if(c === 'paper') {
+                    return 'You win!'
+                } else if (c === 'rock') {
+                    return 'You lose!'
+                } else {
+                    return "It's a draw!"
+                }
+            }
+            if (p === 'paper') {
+                if(c === 'scissors') {
+                    return 'You lose!'
+                } else if (c === 'rock') {
+                    return 'You win!'
+                } else {
+                    return "It's a draw!"
+                }
+            }
+        }
+        
+        //Best out of 5 game function
+        const game = () => {
+            let playerScore = 0
+            let computerScore = 0
+            let decision = ''
+            for(let i = 1;i < 6;i++) {
+                let playerSelection  = playerPlay()
+                let computerSelection = computerPlay()
+                let result = singleRound(playerSelection, computerSelection)
+                if (result === 'You win!') {
+                    playerScore++
+                    console.log(result)
+                } else if (result === 'You lose!') {
+                    console.log(result)
+                    computerScore++
+                } else {
+                    console.log(result)
+                }
+            }
+            if(playerScore > computerScore) {
+                decision = 'You are the winner!'
+            } else if (computerScore > playerScore) {
+                decision = 'You are the loser!'
+            } else {
+                decision = 'It is a draw!'
+            }
+            console.log(`After 5 rounds of play your score is ${playerScore} and the computers score is ${computerScore}. ${decision}`)
+        }
+        game();
+    </script>
+</body>
+</html>
